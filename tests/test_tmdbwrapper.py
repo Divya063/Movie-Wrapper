@@ -21,3 +21,13 @@ def test_tv_info():
     assert isinstance(response, dict)
     assert response['id'] == 1396, "The ID should be in the response"
    
+@vcr.use_cassette('tests/vcr_cassettes/tv-popular.yml')
+def test_tv_popular():
+    """Tests an API call to get a popular tv shows"""
+
+    response = TV.popular()
+
+    assert isinstance(response, dict)
+    assert isinstance(response['results'], list)
+    assert isinstance(response['results'][0], dict)
+    assert set(tv_keys).issubset(response['results'][0].keys())
