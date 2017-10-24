@@ -9,7 +9,7 @@ def tv_keys():
               'first_air_date', 'vote_count', 'vote_average']
 
 
-@vcr.use_cassette('tests/vcr_cassettes/tv-info.yml')		  
+@vcr.use_cassette('tests/vcr_cassettes/tv-info.yml',filter_query_parameters=['e3b11a3037631380fe2c8e84a59347ac'])		  
 def test_tv_info(tv_keys):
     """Tests an API call to get a TV show's info"""
 
@@ -20,7 +20,7 @@ def test_tv_info(tv_keys):
     assert response['id'] == 1396 
     assert set(tv_keys).issubset(response.keys())
    
-@vcr.use_cassette('tests/vcr_cassettes/tv-popular.yml')
+@vcr.use_cassette('tests/vcr_cassettes/tv-popular.yml',filter_query_parameters=['e3b11a3037631380fe2c8e84a59347ac'])
 def test_tv_popular(tv_keys):
     """Tests an API call to get a popular tv shows"""
 
